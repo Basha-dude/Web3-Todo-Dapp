@@ -10,6 +10,8 @@ describe("TodoApp", function() {
     // Define the necessary variables
     let todoApp;
     let owner;
+    let user1;
+    let user2;
 
     
     
@@ -71,6 +73,21 @@ describe("TodoApp", function() {
             
         });
         
+        it("should delete the task ",async() => {
+            const message = "Test Task";
+            let taskId = 0;
+            const TASK_ID = 0;
+            const TASK_DELETED = true;
+             let transaction,result
+            let AddTask =  await todoApp.addTodo(message, taskId); 
+            transaction = await todoApp.deleteTask(TASK_ID,TASK_DELETED)
+            result = await transaction.wait();
+            console.log(transaction);
+            let task = await todoApp.tasks();
+
+            expect(task[0].isCompleted).to.eq(true)
+
+        })
       
             
       
